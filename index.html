@@ -27,89 +27,48 @@
             background-color: #f0f2f5;
             color: var(--dark);
             line-height: 1.6;
-        }
-
-        .container {
             display: flex;
+            justify-content: center;
+            align-items: center;
             min-height: 100vh;
         }
 
-        /* Sidebar */
-        .sidebar {
-            width: 250px;
-            background: var(--dark);
-            color: white;
-            padding: 20px 0;
-        }
-
-        .logo {
-            text-align: center;
-            padding: 20px 0;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            margin-bottom: 20px;
-        }
-
-        .logo h1 {
-            font-size: 1.5rem;
-            color: white;
-        }
-
-        .menu-item {
-            padding: 15px 20px;
-            display: flex;
-            align-items: center;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .menu-item:hover, .menu-item.active {
-            background-color: rgba(255,255,255,0.1);
-        }
-
-        .menu-item i {
-            margin-right: 10px;
-            font-size: 1.2rem;
-        }
-
-        /* Main Content */
-        .main-content {
-            flex: 1;
+        .form-builder {
+            width: 80%;
+            max-width: 900px;
+            background: white;
+            border-radius: 8px;
             padding: 20px;
-            overflow-y: auto;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
 
         .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            text-align: center;
             margin-bottom: 30px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid #e0e0e0;
         }
 
         .header h2 {
             color: var(--dark);
-            font-weight: 500;
         }
 
-        /* Form Builder */
-        .form-builder {
-            display: flex;
-            gap: 20px;
+        .form-title input {
+            font-size: 24px;
+            font-weight: 500;
+            text-align: center;
+            border: none;
+            border-bottom: 2px dashed #ddd;
+            padding: 10px;
+            width: 100%;
+            outline: none;
+            transition: all 0.3s;
+        }
+
+        .form-title input:focus {
+            border-bottom: 2px solid var(--primary);
         }
 
         .components-panel {
-            width: 250px;
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            padding: 15px;
-        }
-
-        .components-panel h3 {
-            margin-bottom: 15px;
-            color: var(--gray);
-            font-weight: 500;
+            margin-bottom: 20px;
         }
 
         .component-item {
@@ -134,32 +93,7 @@
         }
 
         .form-canvas {
-            flex: 1;
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            padding: 20px;
-        }
-
-        .form-title {
-            text-align: center;
             margin-bottom: 30px;
-        }
-
-        .form-title input {
-            font-size: 24px;
-            font-weight: 500;
-            text-align: center;
-            border: none;
-            border-bottom: 2px dashed #ddd;
-            padding: 10px;
-            width: 100%;
-            outline: none;
-            transition: all 0.3s;
-        }
-
-        .form-title input:focus {
-            border-bottom: 2px solid var(--primary);
         }
 
         .question-box {
@@ -270,93 +204,154 @@
     </style>
 </head>
 <body>
-    <div class="container">
-        <!-- Sidebar -->
-        <div class="sidebar">
-            <div class="logo">
-                <h1><i class="fab fa-google"></i> FormBuilder</h1>
+
+    <div class="form-builder">
+        <div class="header">
+            <h2>Criar Novo Formulário</h2>
+        </div>
+
+        <div class="form-title">
+            <input type="text" placeholder="Título do Formulário" value="Pesquisa de Satisfação">
+        </div>
+
+        <div class="components-panel">
+            <h3>Elementos do Formulário</h3>
+            <div class="component-item" data-type="text">
+                <i class="fas fa-font"></i> Texto Curto
             </div>
-            <div class="menu-items">
-                <div class="menu-item active" data-target="form-builder">
-                    <i class="fas fa-wrench"></i> Construtor de Formulário
-                </div>
-                <div class="menu-item" data-target="dashboard">
-                    <i class="fas fa-chart-bar"></i> Painel de Respostas
-                </div>
-                <div class="menu-item" data-target="integration">
-                    <i class="fas fa-link"></i> Integração Google Planilhas
-                </div>
-                <div class="menu-item" data-target="settings">
-                    <i class="fas fa-cog"></i> Configurações
-                </div>
+            <div class="component-item" data-type="paragraph">
+                <i class="fas fa-paragraph"></i> Parágrafo
+            </div>
+            <div class="component-item" data-type="multiple">
+                <i class="fas fa-dot-circle"></i> Múltipla Escolha
+            </div>
+            <div class="component-item" data-type="checkbox">
+                <i class="fas fa-check-square"></i> Caixas de Seleção
+            </div>
+            <div class="component-item" data-type="dropdown">
+                <i class="fas fa-caret-down"></i> Lista Suspensa
             </div>
         </div>
 
-        <!-- Main Content -->
-        <div class="main-content">
-            <!-- Form Builder Section -->
-            <div id="form-builder" class="form-section">
-                <div class="header">
-                    <h2>Criar Novo Formulário</h2>
-                    <button class="btn btn-primary" id="share-btn">
-                        <i class="fas fa-share"></i> Compartilhar Formulário
-                    </button>
-                </div>
-                
-                <div class="form-builder">
-                    <div class="components-panel">
-                        <h3>Elementos do Formulário</h3>
-                        <div class="component-item" data-type="text">
-                            <i class="fas fa-font"></i> Texto Curto
-                        </div>
-                        <div class="component-item" data-type="paragraph">
-                            <i class="fas fa-paragraph"></i> Parágrafo
-                        </div>
-                        <div class="component-item" data-type="multiple">
-                            <i class="fas fa-dot-circle"></i> Múltipla Escolha
-                        </div>
-                        <div class="component-item" data-type="checkbox">
-                            <i class="fas fa-check-square"></i> Caixas de Seleção
-                        </div>
-                        <div class="component-item" data-type="dropdown">
-                            <i class="fas fa-caret-down"></i> Lista Suspensa
-                        </div>
-                    </div>
-                    
-                    <div class="form-canvas">
-                        <div class="form-title">
-                            <input type="text" placeholder="Título do Formulário" value="Pesquisa de Satisfação">
-                        </div>
-                        <!-- Perguntas do Formulário -->
-                        <div class="question-box">
-                            <div class="question-header">
-                                <input type="text" class="question-text" placeholder="Pergunta" value="Qual é o seu nome?">
-                                <select>
-                                    <option>Texto Curto</option>
-                                    <option>Parágrafo</option>
-                                    <option>Múltipla Escolha</option>
-                                    <option>Caixas de Seleção</option>
-                                    <option>Lista Suspensa</option>
-                                </select>
-                            </div>
-                            <div class="options-list">
-                                <input type="text" placeholder="Texto curto" disabled>
-                            </div>
-                            <div class="question-actions">
-                                <button class="btn btn-danger"><i class="fas fa-trash"></i> Remover</button>
-                                <button class="btn"><i class="fas fa-copy"></i> Duplicar</button>
-                                <button class="btn btn-primary"><i class="fas fa-cog"></i> Regras</button>
-                            </div>
-                        </div>
-                        <!-- Outros exemplos de perguntas -->
-                        <div class="form-actions">
-                            <button class="btn"><i class="fas fa-plus"></i> Adicionar Pergunta</button>
-                            <button class="btn btn-primary"><i class="fas fa-save"></i> Salvar Formulário</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="form-canvas" id="form-canvas">
+            <!-- Perguntas serão adicionadas aqui dinamicamente -->
+        </div>
+
+        <div class="form-actions">
+            <button class="btn btn-primary" onclick="saveForm()">
+                <i class="fas fa-save"></i> Salvar Formulário
+            </button>
         </div>
     </div>
+
+    <script>
+        // Seleciona todos os componentes
+        const components = document.querySelectorAll('.component-item');
+        const formCanvas = document.getElementById('form-canvas');
+
+        // Função para adicionar perguntas
+        components.forEach(component => {
+            component.addEventListener('click', function() {
+                const questionType = this.getAttribute('data-type');
+                addQuestion(questionType);
+            });
+        });
+
+        // Função para adicionar perguntas no canvas
+        function addQuestion(type) {
+            const questionBox = document.createElement('div');
+            questionBox.classList.add('question-box');
+
+            const questionHeader = document.createElement('div');
+            questionHeader.classList.add('question-header');
+            
+            const questionText = document.createElement('input');
+            questionText.classList.add('question-text');
+            questionText.placeholder = 'Pergunta';
+
+            const questionSelect = document.createElement('select');
+            questionSelect.innerHTML = `
+                <option>Texto Curto</option>
+                <option>Parágrafo</option>
+                <option>Múltipla Escolha</option>
+                <option>Caixas de Seleção</option>
+                <option>Lista Suspensa</option>
+            `;
+            questionSelect.value = type.charAt(0).toUpperCase() + type.slice(1);
+
+            questionHeader.appendChild(questionText);
+            questionHeader.appendChild(questionSelect);
+
+            const optionsList = document.createElement('div');
+            optionsList.classList.add('options-list');
+
+            // Para tipos como múltipla escolha ou lista suspensa, adiciona opções
+            if (type === 'multiple' || type === 'checkbox' || type === 'dropdown') {
+                const optionItem = document.createElement('div');
+                optionItem.classList.add('option-item');
+                optionItem.innerHTML = `
+                    <input type="text" placeholder="Nova opção">
+                    <input type="number" placeholder="Limite" title="Limite de respostas">
+                `;
+                optionsList.appendChild(optionItem);
+
+                const addOptionButton = document.createElement('div');
+                addOptionButton.classList.add('add-option');
+                addOptionButton.innerHTML = `<i class="fas fa-plus"></i> Adicionar opção`;
+
+                addOptionButton.addEventListener('click', () => {
+                    const newOption = document.createElement('div');
+                    newOption.classList.add('option-item');
+                    newOption.innerHTML = `
+                        <input type="text" placeholder="Nova opção">
+                        <input type="number" placeholder="Limite" title="Limite de respostas">
+                    `;
+                    optionsList.appendChild(newOption);
+                });
+
+                optionsList.appendChild(addOptionButton);
+            }
+
+            const questionActions = document.createElement('div');
+            questionActions.classList.add('question-actions');
+            questionActions.innerHTML = `
+                <button class="btn btn-danger"><i class="fas fa-trash"></i> Remover</button>
+                <button class="btn"><i class="fas fa-copy"></i> Duplicar</button>
+                <button class="btn btn-primary"><i class="fas fa-cog"></i> Regras</button>
+            `;
+
+            questionBox.appendChild(questionHeader);
+            questionBox.appendChild(optionsList);
+            questionBox.appendChild(questionActions);
+
+            formCanvas.appendChild(questionBox);
+
+            // Adiciona funcionalidade de remover a pergunta
+            questionActions.querySelector('.btn-danger').addEventListener('click', () => {
+                formCanvas.removeChild(questionBox);
+            });
+        }
+
+        // Função para salvar o formulário
+        function saveForm() {
+            const formTitle = document.querySelector('.form-title input').value;
+            const questions = [];
+            const questionBoxes = document.querySelectorAll('.question-box');
+
+            questionBoxes.forEach(questionBox => {
+                const questionText = questionBox.querySelector('.question-text').value;
+                const questionType = questionBox.querySelector('select').value;
+                questions.push({ questionText, questionType });
+            });
+
+            const formData = {
+                title: formTitle,
+                questions: questions
+            };
+
+            console.log('Formulário salvo:', formData);
+            alert('Formulário salvo com sucesso!');
+        }
+    </script>
 </body>
 </html>
